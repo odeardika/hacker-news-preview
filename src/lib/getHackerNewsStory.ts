@@ -1,6 +1,4 @@
 import axios from "axios";
-// import createArticle from "../lib/createArticle"
-// import cornJob from 'node-cron'
 
 export async function getHackerNewsStory() {
   const storyIdsResponse: Response = await fetch(

@@ -1,7 +1,6 @@
-import { PrismaClient } from "@prisma/client"
+import prisma from "../../../../server/db/client"
 import { NextRequest, NextResponse } from "next/server"
 import { URL } from "url"
-const prisma = new PrismaClient()
 
 type Article = {
     title: string
