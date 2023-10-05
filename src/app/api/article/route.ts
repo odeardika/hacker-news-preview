@@ -7,6 +7,8 @@ type Article = {
     url: string
     author: string
     score: number
+    description: string
+    image: string
 }
 
 export async function GET(req : NextRequest){
@@ -34,7 +36,7 @@ export async function GET(req : NextRequest){
 
 export async function POST(req : NextRequest){
     const data : Article = await req.json()
-    const { title, url, author, score } = data
+    const { title, url, author, score, description, image } = data
 
     // check if url already exist in table
     const checkUrl = await prisma.article.findUnique({
@@ -53,11 +55,13 @@ export async function POST(req : NextRequest){
             url: url,
             author: author,
             score: score,
+            description: description,
+            image: image
         },
     })  
     console.log(article)
     return NextResponse.json({
-        title,url,author,score
+        title,url,author,score,description,image
     })
     }
 }

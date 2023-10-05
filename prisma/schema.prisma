@@ -17,4 +17,6 @@ model Article {
   createAt DateTime @default(now())
   author   String
   score    Int
+  image    String
+  description String
 }

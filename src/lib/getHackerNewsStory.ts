@@ -1,4 +1,5 @@
 import axios from "axios";
+import { get } from "http";
 
 export async function getHackerNewsStory() {
   const storyIdsResponse: Response = await fetch(
@@ -34,19 +35,35 @@ export async function getHackerNewsStory() {
   // send filteredStories to database
   const stories = filteredStories.map(async (story) => {
     const storyValue = await story;
+
     if (storyValue) {
+      
       // send only stories that are not already in database
-      const checkUrl = await axios.get(`api/article?url=${storyValue.url}`);
+      const checkUrl = await axios.get(`api/article?url=${storyValue.url}`)
+
       if (checkUrl.data.message !== "url not found") {
         return checkUrl.data.message;
+      
       } else {
+        // get story data image from url
+        const getStoryData = (
+          await axios.post('/api/request', {
+            url: storyValue.url,
+          })
+        ).data
+
         // send all filtered stories to database
+        if(getStoryData.image !== null && getStoryData.description !== null && getStoryData.author !== null){
         return await axios.post(`api/article?`, {
           title: storyValue.title,
           url: storyValue.url,
-          author: storyValue.by,
+          author: getStoryData.author,
           score: storyValue.score,
-        });
+          image: getStoryData.image,
+          description: getStoryData.description,
+        })
+      }
+
       }
     }
   });
