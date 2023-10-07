@@ -41,9 +41,9 @@ export default function Home() {
   return (
     <>
       Hacker News Story
-      <ul>
-        {listStory.map((story) => (<li key={story.id}>< CardPreview story={story}/></li>))}
-      </ul>
+      <div className="flex flex-row flex-grow  overflow-auto max-h-[500px] snap-center">
+          {listStory.map((story) => (<div className="basis-1/5 hover:basis-1/2" key={story.id}>< CardPreview story={story}/></div>))}
+      </div>
     </>
   )
 }

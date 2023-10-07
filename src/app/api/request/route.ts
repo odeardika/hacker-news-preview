@@ -18,7 +18,7 @@ export async function GET(req : NextRequest){
             orderBy: {
                 createAt: 'desc'
             },
-            take: 18
+            take: 10
         })
         return NextResponse.json(newestArticles)
     }
