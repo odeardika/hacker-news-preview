@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react"
 import CardPreview from "../components/CardPreview"
 import { getHackerNewsStory } from "@/lib/getHackerNewsStory"
+import Article from "@/components/Article"
 
 
-type storyData = {
+type articleData = {
   id: number
   title: string
   url: string
@@ -26,24 +27,39 @@ export default function Home() {
   
   
   // requaest data from database
-  const [listStory , setListStory] = useState<storyData[]>([])
+  const [listStory , setListStory] = useState<articleData[]>([])
+  const [listAllArticle , setListAllArticle] = useState<articleData[]>([])
 
   useEffect(() => {
-    getHackerNewsStory()
+    // getHackerNewsStory()
     fetch(`/api/request?all=false`)
     .then(res => res.json())
     .then(data => {
       setListStory(data)
     })
+    fetch(`/api/request?all=true`)
+    .then(res => res.json())
+    .then(data => {
+      setListAllArticle(data)
+    })
   }
   ,[])
+
   
   return (
     <>
       Hacker News Story
-      <div className="flex flex-row flex-grow  overflow-auto max-h-[500px] snap-center">
-          {listStory.map((story) => (<div className="basis-1/5 hover:basis-1/2" key={story.id}>< CardPreview story={story}/></div>))}
+      <div className="flex flex-row flex-grow overflow-auto max-h-[500px] snap-center">
+          {listStory.map((story) => (<div className="" key={story.id}>< CardPreview story={story}/></div>))}
       </div>
+      
+      <div className="grid-rows-2 mt-16">
+        {listAllArticle.map((story) => (
+        <div className="" key={story.id}>
+          <Article article={story}/>
+          </div>))}
+      </div>
+      
     </>
   )
 }

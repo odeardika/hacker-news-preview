@@ -9,7 +9,13 @@ export async function GET(req : NextRequest){
     const {searchParams} = new URL(req.url)
     const all = searchParams.get('all')
     if(all === 'true'){
-        const allArticles = await prisma.article.findMany()
+        const allArticles = await prisma.article.findMany(
+            {
+                orderBy: {
+                    createAt: 'desc'
+                }
+            }
+        )
         return NextResponse.json(allArticles)
     }
     // get 10 newest articles

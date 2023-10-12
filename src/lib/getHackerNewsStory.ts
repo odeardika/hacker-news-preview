@@ -1,5 +1,4 @@
 import axios from "axios";
-import { get } from "http";
 
 export async function getHackerNewsStory() {
   const storyIdsResponse: Response = await fetch(
@@ -53,14 +52,14 @@ export async function getHackerNewsStory() {
         ).data
 
         // send all filtered stories to database
-        if(getStoryData.image !== null && getStoryData.description !== null && getStoryData.author !== null){
+        if(getStoryData.image !== undefined && getStoryData.image !== null){
         return await axios.post(`api/article?`, {
           title: storyValue.title,
           url: storyValue.url,
-          author: getStoryData.author,
+          author: getStoryData.author? getStoryData.author : storyValue.by,
           score: storyValue.score,
           image: getStoryData.image,
-          description: getStoryData.description,
+          description: getStoryData.description? getStoryData.description : storyValue.title,
         })
       }
 
