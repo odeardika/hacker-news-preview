@@ -1,3 +1,7 @@
+import Image from 'next/image'
+import star from '../../public/star.svg'
+import user from '../../public/user.svg'
+
 type storyData = {
   id: number
   title: string
@@ -21,17 +25,19 @@ const CardPreview = ({story}  : props) => {
     <>
     <div>
       <a href={story.url} target='_blank' >
-        <div className='border-solid border-4 w-96 h-96 m-5 rounded-lg flex flex-col justify-between'>
-          <div className='flex justify-center h-52'>
-            <img className='object-fill' src={story.image} width={200} height={200} alt='apple-touch-icon' />
-          </div>
-          <div className='border-solid border-t-4 px-2 flex-grow'>
-            <h5 className='font-bold'>{story.title}</h5>
-            <h5 >{story.url}</h5>
-          </div>
-          <div className='flex flex-wrap border-solid border-t-4 px-2 z-10 '>
-            <h6 className='w-1/2'>{`Author : ${story.author}`}</h6>
-            <h6 className='w-1/2'>{`Score : ${story.score}`}</h6>
+        <div className=" h-96">
+          <div className="w-96 h-44 m-8 bg-cover bg-center rounded-lg" style={{backgroundImage: `url(${story.image})`}}></div>
+          <div className=" px-12">
+            <h2 className="font-bold">{story.title}</h2>
+            <h2>{story.url}</h2>
+            <div className='flex items-center'>
+              <Image src={user} width={20} height={20} alt='user' />
+              <p className='ml-2'>{story.author}</p>
+            </div>
+            <div className='flex items-center'>
+              <Image src={star} width={20} height={20} alt='star' />
+              <p className='ml-2'>{story.score}</p>
+            </div>
           </div>
         </div>
       </a>
@@ -39,5 +45,4 @@ const CardPreview = ({story}  : props) => {
     </>
   )
 }
-
 export default CardPreview

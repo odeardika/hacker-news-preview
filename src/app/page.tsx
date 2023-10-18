@@ -55,8 +55,8 @@ export default function Home() {
   return (
     <>
       Hacker News Story
-      <div className="flex flex-row flex-grow overflow-auto max-h-[500px] snap-center">
-          {listStory.map((story) => (<div className="" key={story.id}>< CardPreview story={story}/></div>))}
+      <div className="flex flex-row flex-grow overflow-auto h-auto snap-center">
+          {listStory.map((story) => (<div className="" key={`show-${story.id}`}>< CardPreview story={story}/></div>))}
       </div>
       {listAllArticle && listAllArticle.map((story, index) => {
         if (index % 2 === 0 && listAllArticle.length > index + 1) {
