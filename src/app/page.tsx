@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import CardPreview from "../components/CardPreview"
 import Article from "@/components/Article"
+import Header from "@/components/Header"
 
 
 type articleData = {
@@ -26,16 +27,6 @@ export default function Home() {
   // requaest data from database
   const [listStory , setListStory] = useState<articleData[]>([])
   const [listAllArticle , setListAllArticle] = useState<articleData[]>([])
-  let tempStory : articleData = {
-    id: 0,
-    title: '',
-    url: '',
-    score: 0,
-    author: '',
-    image: '',
-    desc : ''
-  }
-  const [tempArticle , setTempArticle] = useState(tempStory)
 
   useEffect(() => {
     fetch(`/api/request?all=false`)
@@ -54,8 +45,8 @@ export default function Home() {
   
   return (
     <>
-      Hacker News Story
-      <div className="flex flex-row flex-grow overflow-auto h-auto snap-center">
+      <Header />
+      <div className="flex flex-row flex-grow overflow-auto h-auto snap-center mb-10">
           {listStory.map((story) => (<div className="" key={`show-${story.id}`}>< CardPreview story={story}/></div>))}
       </div>
       {listAllArticle && listAllArticle.map((story, index) => {
