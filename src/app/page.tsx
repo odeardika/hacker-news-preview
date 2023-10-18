@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import CardPreview from "../components/CardPreview"
-import { getHackerNewsStory } from "@/lib/getHackerNewsStory"
 import Article from "@/components/Article"
 
 
@@ -24,14 +23,21 @@ type urlData = {
 }
 
 export default function Home() {
-  
-  
   // requaest data from database
   const [listStory , setListStory] = useState<articleData[]>([])
   const [listAllArticle , setListAllArticle] = useState<articleData[]>([])
+  let tempStory : articleData = {
+    id: 0,
+    title: '',
+    url: '',
+    score: 0,
+    author: '',
+    image: '',
+    desc : ''
+  }
+  const [tempArticle , setTempArticle] = useState(tempStory)
 
   useEffect(() => {
-    // getHackerNewsStory()
     fetch(`/api/request?all=false`)
     .then(res => res.json())
     .then(data => {
@@ -52,14 +58,24 @@ export default function Home() {
       <div className="flex flex-row flex-grow overflow-auto max-h-[500px] snap-center">
           {listStory.map((story) => (<div className="" key={story.id}>< CardPreview story={story}/></div>))}
       </div>
-      
-      <div className="grid-rows-2 mt-16">
-        {listAllArticle.map((story) => (
-        <div className="" key={story.id}>
-          <Article article={story}/>
-          </div>))}
-      </div>
-      
+      {listAllArticle && listAllArticle.map((story, index) => {
+        if (index % 2 === 0 && listAllArticle.length > index + 1) {
+          return (
+            <div className="flex">
+              <div className="w-1/2">
+                <div key={story.id}><Article article={story} /></div>
+              </div>
+              <div className="w-1/2">
+                <div key={listAllArticle[index + 1].id}><Article article={listAllArticle[index + 1]} /></div>
+              </div>
+            </div>
+          )
+        }
+          return (
+            <></>
+          )
+        }
+      )}
     </>
   )
 }
