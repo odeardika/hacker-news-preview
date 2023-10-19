@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-  
+.recent-article::-webkit-scrollbar{
+  display: none;
 }

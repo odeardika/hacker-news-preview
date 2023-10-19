@@ -46,7 +46,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="flex flex-row flex-grow overflow-auto h-auto snap-center mb-10">
+      <div className="recent-article flex flex-row flex-grow overflow-auto h-auto snap-center mb-10">
           {listStory.map((story) => (<div className="" key={`show-${story.id}`}>< CardPreview story={story}/></div>))}
       </div>
       {listAllArticle && listAllArticle.map((story, index) => {

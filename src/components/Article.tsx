@@ -24,7 +24,7 @@ export default function Article({article} : props) {
       <a href={article.url} target='_blank'>
         <div className='flex ml-16 my-5'>
           <div className='article-image w-1/4'>
-            <div className="w-52 h-40 bg-cover bg-center rounded-lg" style={{backgroundImage: `url(${article.image})`}}></div>
+            <div className="w-52 h-32 bg-cover bg-center rounded-lg" style={{backgroundImage: `url(${article.image})`}}></div>
           </div>
           <div className='article-detail w-3/4 pt-3 pl-2'>
             <h1 className=' font-bold text-lg'>{article.title}</h1>
