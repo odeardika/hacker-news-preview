@@ -10,6 +10,11 @@ const config: Config = {
     colors: {
       'hacker-news' : '#FF6600'
     },
+    fontSize: {
+      xxs: '0.625rem',
+      xl: '1.25rem',
+      '7xl': '5rem',
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

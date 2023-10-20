@@ -47,23 +47,25 @@ export default function Home() {
     <>
       <Header />
       <div className="recent-article flex flex-row flex-grow overflow-auto h-auto snap-center mb-10">
-          {listStory.map((story) => (<div className="" key={`show-${story.id}`}>< CardPreview story={story}/></div>))}
+          {listStory.map((story, index) => (<div className="" key={`story-${index}`}>< CardPreview story={story}/></div>))}
       </div>
       {listAllArticle && listAllArticle.map((story, index) => {
         if (index % 2 === 0 && listAllArticle.length > index + 1) {
           return (
-            <div className="flex">
-              <div className="w-1/2">
-                <div key={story.id}><Article article={story} /></div>
-              </div>
-              <div className="w-1/2">
-                <div key={listAllArticle[index + 1].id}><Article article={listAllArticle[index + 1]} /></div>
+            <div key={`article-container-${index}`}>
+              <div className="lg:flex">
+                <div className="lg:w-1/2">
+                  <div><Article article={story} /></div>
+                </div>
+                <div className="lg:w-1/2" >
+                  <div><Article article={listAllArticle[index + 1]} /></div>
+                </div>
               </div>
             </div>
           )
         }
           return (
-            <></>
+            <div key={`empty-${index}`}></div>
           )
         }
       )}
