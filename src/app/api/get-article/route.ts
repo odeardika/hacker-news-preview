@@ -3,9 +3,11 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: Request, res: Response) {
     try{
-        getHackerNewsStory()
+        const data = await getHackerNewsStory().then((data) => {
+            return data
+        })
         return NextResponse.json({
-            message: `get article success`
+            message: data
         })
     }catch(err){
         return NextResponse.json({
