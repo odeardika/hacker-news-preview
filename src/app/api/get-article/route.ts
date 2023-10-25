@@ -7,7 +7,7 @@ export async function GET(req: Request, res: Response) {
             return data
         })
         return NextResponse.json({
-            message: data
+            message: JSON.stringify(data)
         })
     }catch(err){
         return NextResponse.json({
